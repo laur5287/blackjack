@@ -1,9 +1,14 @@
+import { ThemeToggle } from '@/components/theme-toggle'
 import Image from 'next/image'
-
+import * as logic from '@/lib/jslogic'
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    // <div className=" border  border-red-500 flex min-h-screen flex-col items-center justify-between ">
 
-    </main>
+    // </div>
+    <>
+      <ThemeToggle />
+
+    </>
   )
 }

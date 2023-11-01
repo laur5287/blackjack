@@ -5,10 +5,13 @@ import { Button } from '@/components/ui/button'
 import { RotateCcw } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 import { getUserSession } from '@/lib/auth'
+import { Avatar } from '@/components/Avatar'
+import { SignIn } from '@/components/signin'
+
 export default async function Home() {
-  const u = await getUserSession()
-  console.log(u)
-  const user = await prisma.user.findFirst({
+  const user = await getUserSession()
+  console.log(user)
+  const u = await prisma.user.findFirst({
     where: {
       email: 'laur.sindile@gmail.com'
     },
@@ -18,9 +21,13 @@ export default async function Home() {
 
     <div id='page' className='flex flex-col items-center h-full '>
 
-      <nav className="flex justify-end w-full ">
-        <Button variant='ghost'><RotateCcw /></Button>
+      <nav className="flex p-4 space-x-2 justify-end items-center w-full ">
+        {/* <Button variant='ghost'><RotateCcw /></Button> */}
         <ThemeToggle />
+
+        {user ? <Avatar user={user} /> : <SignIn />}
+
+
       </nav>
 
       {/* <DealerHand dealer={dealer} /> */}

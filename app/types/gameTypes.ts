@@ -1,4 +1,8 @@
 export interface GameState {
+	userId: string | null
+
+	gameId: string
+	// gameStatus:'progress' | 'ended' | ''
 	resolution: string | undefined
 	showPopUp: boolean
 	showBetPanel: boolean
@@ -35,35 +39,35 @@ export type ScoreProps = {
 }
 
 // Define action types for your game
-// export type SetBetAction = {
-// 	type: 'setBet';
-// 	payload: number;
-// };
+export type SetBetAction = {
+	type: 'setBet';
+	payload: number;
+};
 
-// export type UpdateBalanceAction = {
-// 	type: 'updateBalance';
-// 	payload: number;
-// };
+export type UpdateBalanceAction = {
+	type: 'updateBalance';
+	payload: number;
+};
 
-// export type DealCardsAction = {
-// 	type: 'dealCards';
-// 	payload: string[]
+export type DealCardsAction = {
+	type: 'dealCards';
+	payload: string[]
 
-// };
+};
 
-// export type PlayerHitAction = {
-// 	type: 'playerHit';
-// };
+export type PlayerHitAction = {
+	type: 'playerHit';
+};
 
-// export type PlayerStandAction = {
-// 	type: 'playerStand';
-// }
-// export type ShuffleDeckAction = {
-// 	type: 'shuffleDeck';
-// 	payload: number;
-// };
-// export type generateDeckAction = {
-// 	type: 'generateDeck';
-// };
+export type PlayerStandAction = {
+	type: 'playerStand';
+}
+export type ShuffleDeckAction = {
+	type: 'shuffleDeck';
+	payload: number;
+};
+export type generateDeckAction = {
+	type: 'generateDeck';
+};
 
-// export type GameAction = SetBetAction | UpdateBalanceAction | DealCardsAction | PlayerHitAction | PlayerStandAction | generateDeckAction | ShuffleDeckAction  /* | OtherActionTypes */;
+export type GameAction = SetBetAction | UpdateBalanceAction | DealCardsAction | PlayerHitAction | PlayerStandAction | generateDeckAction | ShuffleDeckAction  /* | OtherActionTypes */;

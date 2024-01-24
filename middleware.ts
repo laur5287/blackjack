@@ -1,8 +1,14 @@
-export { default } from "next-auth/middleware"
-export const config = {
-    matcher: [
-        '/admin/:path*',
-        '/signIn',
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
+import { NextResponse } from 'next/server'
 
-    ]
+import type { NextRequest } from 'next/server'
+import type { Database } from '@/types/types_db'
+
+export async function middleware(req: NextRequest) {
+	const res = NextResponse.next()
+	const supabase = createMiddlewareClient<Database>({ req, res })
+	await supabase.auth.getSession()
+	// console.log(res)
+
+	return res
 }

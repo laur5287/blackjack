@@ -71,12 +71,8 @@ module.exports = {
 				"accordion-up": "accordion-up 0.2s ease-out",
 			},
 			backgroundImage: {
-				'square': "url('/reveal.svg')",
-				'cards_bg': "url('/cards_bg.svg')",
-				'dark_bg': "url('/dark_bg.svg')",
-				'light_bg': "url('/light.svg')",
 				'velvet_bg': "url('/green_velvet.svg')",
-				'circle': "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)",
+				'circle': "radial-gradient(circle, rgba(207,251,255,65) 0%, rgba(28, 29, 30, 99%) 100%)",
 
 			}
 		},

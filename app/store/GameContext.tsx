@@ -1,7 +1,7 @@
 'use client'
 // import { createContext, useContext, useReducer, Dispatch } from 'react';
 
-import { GameAction, SetBetAction, UpdateBalanceAction } from '@/app/types/gameTypes';
+// import { GameAction, SetBetAction, UpdateBalanceAction } from '@/app/types/gameTypes';
 // import { Actions } from 'immer-reducer';
 
 import React, { createContext, useContext } from 'react';
@@ -13,11 +13,28 @@ const GameDispatchContext = createContext<Function | null>(null);
 
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 	const initialState: GameState = {
-		deck: [],
+		userId: '',
+		gameId: '',
+		resolution: '',
+		showPopUp: false,
+		showBetPanel: false,
+		isDealTrue: false,
+		isStandTrue: false,
 		balance: 1000,
 		currentBet: 0,
-		playerHand: [],
-		dealerHand: [],
+		deck: [],
+		player: {
+			hand: [],
+			score: 0,
+			isPlayerTurn: true,
+		},
+		dealer: {
+			hand: [],
+			show: false,
+			score: 0,
+			hiddenScore: 0,
+			isDealerTurn: false,
+		},
 		message: 'Place your bet!',
 	};
 	const [state, updateState] = useImmer(initialState);

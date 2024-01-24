@@ -34,7 +34,7 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"app/store/gameReducer.js"
+		"app/store/gameReducer.ts"
 	],
 	"exclude": [
 		"node_modules"

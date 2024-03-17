@@ -1,5 +1,5 @@
 'use client'
-
+import { useRouter } from "next/navigation";
 interface BetAreaProps {
 	currentBet: number;
 	onBetSelected: (bet: number) => void;
@@ -8,6 +8,7 @@ interface BetAreaProps {
 }
 
 const BetArea: React.FC<BetAreaProps> = ({ currentBet, onBetSelected, onClearBet, onPlaceBet }) => {
+	const router = useRouter()
 	const betOptions = [10, 50, 100, 500]; // Define your bet denominations here
 
 	return (

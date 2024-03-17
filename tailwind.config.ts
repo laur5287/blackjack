@@ -72,7 +72,7 @@ module.exports = {
 			},
 			backgroundImage: {
 				'velvet_bg': "url('/green_velvet.svg')",
-				'circle': "radial-gradient(circle, rgba(207,251,255,65) 0%, rgba(28, 29, 30, 99%) 100%)",
+				'circle': "radial-gradient(circle, rgba(207,251,255,65) 0%, rgba(28,29,30,99%) 100%)",
 
 			}
 		},

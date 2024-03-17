@@ -17,26 +17,38 @@ const DealerHand: React.FC<DealerHandProps> = ({ dealer }) => {
 
 
 
-					<div key={`${card}-${index}`} className={cn(``, show && index >= 1 && ` absolute    w-[100px] h-[150px] left-${6 * index}`)}>
+					<div
+						key={`${card}-${index}`}
+						// className={cn(`absolute  h-[150px]`, show && index >= 1 && ` `)}
+						style={{
+							position: 'absolute',
+							left: parseInt(`${index * 32}`),
+							width: 100,
+							height: 150
+						}}
+					>
 						{show || index !== 0 ? (
 							<Image
 
 								src={getCardImagePath(card)}
 								alt={`Card ${card}`}
-								width={100}
-								height={150}
-								className={cn(`rounded shadow-lg `, index >= 1 && ` -translate-x-18`)}
-								onError={(e) => {
-									e.currentTarget.src = '/cards/default.png'; // Fallback image
-								}}
+								fill
+							// width={100}
+							// height={150}
+							// className={cn(` `, index >= 1 && ` -translate-x-18`)}
+							// onError={(e) => {
+							// 	e.currentTarget.src = '/cards/default.png'; // Fallback image
+							// }}
 							/>
 						) : (
 							<Image
-								src="/cards/BACK_blue.png"
+								src="/cards/BACK.png"
 								alt="Card Back"
-								width={100}
-								height={150}
-								className="rounded shadow-lg"
+								fill
+							// width={100}
+							// height={150}
+
+							// className="rounded shadow-lg "
 							/>
 						)}
 					</div>

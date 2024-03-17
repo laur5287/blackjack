@@ -1,4 +1,5 @@
 import './globals.css'
+import { cookies } from 'next/headers';
 import SupabaseProvider from './supabase-provider';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -8,7 +9,8 @@ import { fontSans } from "@/lib/fonts"
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Avatar } from '@/components/Avatar'
 import Logo from '@/components/icons/Logo';
-import { createServerSupabaseClient } from './supabase-server';
+// import { createServerSupabaseClient } from './supabase-server';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import Link from 'next/link';
 import { buttonVariants } from "@/components/ui/button"
 
@@ -16,7 +18,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 const defaultUrl = process.env.VERCEL_URL
 	? `https://${process.env.VERCEL_URL}`
-	: 'http://localhost:3001'
+	: 'http://localhost:3000'
 
 export const metadata: Metadata = {
 	metadataBase: new URL(defaultUrl),
@@ -30,8 +32,9 @@ export default async function RootLayout({
 	children: React.ReactNode
 }) {
 
-	const supabase = createServerSupabaseClient()
+	const supabase = createServerComponentClient({ cookies })
 	const { data: { user } } = await supabase.auth.getUser()
+	// console.log(user)
 
 	return (
 		<html lang="en" >
@@ -49,7 +52,7 @@ export default async function RootLayout({
 				>
 					<SupabaseProvider>
 						<main suppressHydrationWarning className="relative flex flex-col justify-center dark:bg-circle   bg-velvet_bg  h-screen ">
-							<nav className="flex p-4 space-x-2 justify-center items-center w-80vw ">
+							<nav className="flex p-4 space-x-2 justify-end items-center w-80vw ">
 								<Link href='/'>
 									<Logo />
 

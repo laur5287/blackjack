@@ -12,27 +12,54 @@ export const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
 export const DRAW_CARD = 'DRAW_CARD'
 export const SAVE_STATE = 'SAVE_STATE'
 export const LOGIN = 'LOGIN'
+export const RESETGAME = 'RESETGAME'
 
 export const gameReducer = (draft: GameState, action: any, supabase: any, session: Session | null) => {
 
 
 
 	switch (action.type) {
+
+		case RESETGAME:
+			draft = {
+				userId: draft.userId,
+				gameId: '',
+				// gameStatus:'progress',
+				resolution: '',
+				showPopUp: false,
+				showBetPanel: true,
+				isDealTrue: false,
+				isStandTrue: false,
+				deck: [],
+				balance: draft.balance,
+				currentBet: 0,
+				player: {
+					hand: [],
+					score: 0,
+					isPlayerTurn: false
+				},
+				dealer: {
+					hand: [],
+					show: false,
+					score: 0,
+					hiddenScore: 0,
+					isDealerTurn: false
+				},
+				message: '',
+			}
+			console.log('draft', draft)
+
+
+			break
 		case LOGIN:
 			draft.userId = action.payload
 
 			break
 		case SAVE_STATE:
 			// if (session?.user?.id) {
-			console.log('reducer')
+			// console.log('reducer')
 			saveStateToDB(draft, supabase);
-			console.log('reducer finish')
-
-
-			// }
-
-			// console.log('save', action.payload)
-
+			// console.log('reducer finish')
 			break;
 
 		case PLAY:
@@ -87,7 +114,6 @@ export const gameReducer = (draft: GameState, action: any, supabase: any, sessio
 			break
 
 		case DRAW_CARD:
-
 			const newCard = drawCard(draft.deck)
 			draft.deck = draft.deck.filter(item => item !== newCard) //subtract card from deck
 			if (action.payload === 'player') {
@@ -113,7 +139,7 @@ export const gameReducer = (draft: GameState, action: any, supabase: any, sessio
 			if (playerScore > 21) {
 				draft.resolution = "Player Busts! Dealer Wins!";
 			} else if (dealerScore > 21) {
-				draft.resolution = "Dealer Busts! Player [0]Wins!";
+				draft.resolution = "Dealer Busts! Player Wins!";
 			} else if (playerScore === 21 && dealerScore === 21) {
 				draft.resolution = " It's a Tie!";
 			}

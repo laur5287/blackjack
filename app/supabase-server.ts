@@ -3,12 +3,16 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { cache } from 'react';
 
-export const createServerSupabaseClient = cache(() =>
-	createServerComponentClient<Database>({ cookies })
-);
+// export const createServerSupabaseClient = cache(() =>
+// 	 createServerComponentClient<Database>({ cookies })
+// );
+// export const createServerSupabaseClient = () => {
+// 	return
+// 	createServerComponentClient<Database>({ cookies })
+// }
 
 export async function getSession() {
-	const supabase = createServerSupabaseClient();
+	const supabase = createServerComponentClient({ cookies });
 	try {
 		const {
 			data: { session }

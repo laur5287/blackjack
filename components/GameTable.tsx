@@ -13,18 +13,21 @@ import HitButton from '@/components/HitButton'
 import { gameReducer, DEAL_CARDS, PLAY, STAND, HIT, CLEAR_BET, PLACE_BET, DRAW_CARD, EVALUATE_GAME, SAVE_STATE } from "@/app/store/gameReducer"
 import OutcomePopUp from '@/components/OutcomePopUp'
 import { Badge } from "@/components/ui/badge"
-import { Resolution } from "@/components/Resolution"
+import { ResolutionDialog } from "@/components/Resolution"
 import { useSupabase } from "@/app/supabase-provider"
 import type { User } from '@supabase/auth-helpers-nextjs';
 import type { Session } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from "react"
 import { Button } from "./ui/button"
 import { saveStateToDB } from "@/app/store/gameReducer"
+import { useRouter } from "next/navigation"
 
 
 
 
 export const GameTable = () => {
+	const router = useRouter()
+
 	const { supabase, session, loading, state, dispatch } = useSupabase(); //async
 	const [status, setStatus] = useState(state.resolution)
 	// useEffect(() => {
@@ -66,31 +69,32 @@ export const GameTable = () => {
 	// }, initialState);
 	const handlePlay = () => {
 		dispatch({ type: PLAY })
+		router.push('/bet')
 	};
 
-	const handleDeal = () => {
+	// const handleDeal = () => {
 
-		dispatch({ type: DEAL_CARDS });
-		dispatch({ type: EVALUATE_GAME });
+	// 	dispatch({ type: DEAL_CARDS });
+	// 	dispatch({ type: EVALUATE_GAME });
 
-	}
+	// }
 
-	const handleHit = () => {
+	// const handleHit = () => {
 
-		dispatch({ type: HIT });
-		dispatch({ type: EVALUATE_GAME });
-	}
-	const handleStand = () => {
-		dispatch({ type: STAND });
-		dispatch({ type: EVALUATE_GAME });
-		dispatch({ type: DRAW_CARD, payload: 'dealer' })
-		dispatch({ type: EVALUATE_GAME });
-		// dispatch({ type: EVALUATE_GAME });
-	}
-	useEffect(() => {
-		console.log('state changed', state)
+	// 	dispatch({ type: HIT });
+	// 	dispatch({ type: EVALUATE_GAME });
+	// }
+	// const handleStand = () => {
+	// 	dispatch({ type: STAND });
+	// 	dispatch({ type: EVALUATE_GAME });
+	// 	dispatch({ type: DRAW_CARD, payload: 'dealer' })
+	// 	dispatch({ type: EVALUATE_GAME });
+	// 	// dispatch({ type: EVALUATE_GAME });
+	// }
+	// useEffect(() => {
+	// 	console.log('state changed', state)
 
-	}, [state])
+	// }, [state])
 
 	function handleSave() {
 		// console.log("hello")
@@ -106,7 +110,7 @@ export const GameTable = () => {
 		<div id='table' className=' flex relative flex-col justify-center items-center w-full h-full'>
 			{/* <Button onClick={handleSave}>Save</Button> */}
 			{state.showPopUp && <PlayPopUp onStartClick={handlePlay} />}
-			{state.showBetPanel &&
+			{/* {state.showBetPanel &&
 				(
 					<div className='flex flex-col shadow-2xl w-full '>
 						<BalanceDisplay balance={state.balance} />
@@ -117,31 +121,30 @@ export const GameTable = () => {
 							onPlaceBet={handleDeal}
 						/>
 					</div>
-				)}
-			{state.isDealTrue && (
-				<div className="w-full shadow-2xl">
+				)} */}
+			{/* {state.isDealTrue && (
+				<div className="w-full ">
 					<BalanceDisplay balance={state.balance} />
 					<section className='flex relative w-full   flex-col gap-1 items-center justify-center '>
 						<DealerHand dealer={state.dealer} />
+
 						<div id='actions' className='flex items-center justify-around min-h-[100px] min-w-full'>
 							<HitButton onHitClick={handleHit} />
 							<Badge className='p-8 text-xl shadow-2xl font-bold border-transparent' variant="outline" >
 								${state.currentBet}
-
 							</Badge>
-
 							<StandButton onStandClick={handleStand} />
 						</div>
-						<PlayerHand player={state.player} />
 
+						<PlayerHand player={state.player} />
 					</section>
 				</div>
-			)}
-			{state.resolution && (
+			)} */}
+			{/* {state.resolution && (
 				<>
-					<Resolution message={state.resolution} />
+					<ResolutionDialog message={state.resolution} />
 				</>
-			)}
+			)} */}
 		</div>
 	)
 }
